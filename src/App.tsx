@@ -29,6 +29,13 @@ class Clock extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps: Readonly<{ name: string }>) {
+    if (prevProps.name !== this.props.name) {
+      // eslint-disable-next-line no-console
+      console.warn(`Renamed from ${prevProps.name} to ${this.props.name}`);
+    }
+  }
+
   render() {
     return (
       <div className="Clock">
@@ -55,7 +62,7 @@ export class App extends React.Component {
     document.addEventListener('click', this.showClock);
 
     this.timer = window.setInterval(() => {
-      this.setState((prevState) => {
+      this.setState(prevState => {
         const newName = getRandomName();
 
         // eslint-disable-next-line no-console
